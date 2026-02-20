@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfApp1.Add"
+﻿<Window x:Class="WpfApp1.AddClient"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Риэлтор" Height="280" Width="350"
+        Title="Клиент" Height="240" Width="350"
         WindowStartupLocation="CenterOwner">
 
     <Grid Margin="10">
@@ -27,8 +27,11 @@
         <TextBlock Text="Отчество:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
         <TextBox x:Name="TxtMiddleName" Grid.Row="2" Grid.Column="1" Margin="5,2"/>
 
-        <TextBlock Text="Оплата:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox x:Name="TxtDealShare" Grid.Row="3" Grid.Column="1" Margin="5,2"/>
+        <TextBlock Text="Телефон:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="TxtPhone" Grid.Row="3" Grid.Column="1" Margin="5,2"/>
+
+        <TextBlock Text="Почта:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="TxtEmail" Grid.Row="4" Grid.Column="1" Margin="5,2"/>
 
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
             <Button Content="ОК" Width="70" Click="BtnOk_Click" Margin="0,0,10,0"/>

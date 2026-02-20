@@ -44,27 +44,115 @@ namespace WpfApp1
                 ListView1.Focus();
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnAgentDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ListView1.SelectedItem is Agent selected)
+            {
+                if (MessageBox.Show("Удалить?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    using (var db = new User50Context())
+                    {
+                        var item = db.Agents.Find(selected.Id);
+                        if (item != null)
+                        {
+                            db.Agents.Remove(item);
+                            db.SaveChanges();
+                            LoadDBInListView();
+                        }
+                    }
+                }
+            }
+            else { MessageBox.Show("Выберите запись"); }
+        }
+        private void BtnAgentEdit_Click(object sender, RoutedEventArgs e)
+        {
+            if (ListView1.SelectedItem is Agent selected)
+            {
+                using (var db = new User50Context())
+                {
+                    var item = db.Agents.Find(selected.Id);
+                    if (item != null)
+                    {
+                        var window = new Add(db, item);
+                        if (window.ShowDialog() == true)
+                        {
+                            LoadDBInListView();
+                        }
+                    }
+                }
+            }
+            else { MessageBox.Show("Выберите запись"); }
+        }
+        private void BtnAgentAdd_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new User50Context())
+            {
+          
+                var window = new Add(db);
+                if (window.ShowDialog() == true)
+                {
+                    LoadDBInListView();
+                }
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_CreateClient(object sender, RoutedEventArgs e)
         {
-
+            using (var db = new User50Context())
+            {
+                var add = new AddClient(db);
+                if (add.ShowDialog() == true)
+                {
+                    LoadDBInListView();
+                }
+            }
         }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_EditClient(object sender, RoutedEventArgs e)
         {
-
+            if (ListView2.SelectedItem is Client selected)
+            {
+                using (var db = new User50Context())
+                {
+                    var client = db.Clients.Find(selected.Id);
+                    if (client != null)
+                    {
+                        var edit = new AddClient(db, client);
+                        if (edit.ShowDialog() == true)
+                        {
+                            LoadDBInListView();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись");
+            }
         }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_DeleteClient(object sender, RoutedEventArgs e)
         {
-            Add f = new Add();
-            f.ShowDialog();
+            if (ListView2.SelectedItem is Client selected)
+            {
+                if (MessageBox.Show("Удалить?", "Подтверждение", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    using (var db = new User50Context())
+                    {
+                        var client = db.Clients.Find(selected.Id);
+                        if (client != null)
+                        {
+                            db.Clients.Remove(client);
+                            db.SaveChanges();
+                            LoadDBInListView();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись");
+            }
         }
+       
     }
 }
         
